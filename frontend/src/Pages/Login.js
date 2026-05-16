@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../config";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Login = () => {
   /* ================= LOGIN ================= */
   const loginUser = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/login", {
+      const res = await axios.post(`${API_URL}/login`, {
         email: form.email,
         password: form.password
       });
@@ -50,7 +51,7 @@ const Login = () => {
   /* ================= REGISTER ================= */
   const registerUser = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/register", form);
+      const res = await axios.post(`${API_URL}/register`, form);
       alert(res.data);
       setPage("login");
     } catch (err) {
@@ -61,7 +62,7 @@ const Login = () => {
   /* ================= SEND OTP (EMAIL) ================= */
   const sendOTP = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/send-otp", {
+      const res = await axios.post(`${API_URL}/send-otp`, {
         email: form.email
       });
       alert(res.data);
@@ -73,7 +74,7 @@ const Login = () => {
   /* ================= RESET PASSWORD ================= */
   const resetPassword = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/reset-password", {
+      const res = await axios.post(`${API_URL}/reset-password`, {
         email: form.email,
         otp: form.otp,
         newPassword: form.newPassword

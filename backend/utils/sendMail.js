@@ -10,8 +10,9 @@ const transporter = nodemailer.createTransport({
 
 const sendAdminPaymentMail = async (order) => {
   try {
-    const approveLink = `http://localhost:5000/admin/approve-payment/${order._id}`;
-    const rejectLink = `http://localhost:5000/admin/reject-payment/${order._id}`;
+    const baseUrl = process.env.BACKEND_URL || "http://localhost:5000";
+    const approveLink = `${baseUrl}/admin/approve-payment/${order._id}`;
+    const rejectLink = `${baseUrl}/admin/reject-payment/${order._id}`;
 
     await transporter.sendMail({
       from: process.env.MAIL_USER,

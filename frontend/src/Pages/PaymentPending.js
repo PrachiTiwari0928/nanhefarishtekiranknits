@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import API_URL from "../config";
 
 const PaymentPending = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const PaymentPending = () => {
 
     const interval = setInterval(async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/order-status/${orderId}`);
+        const res = await axios.get(`${API_URL}/order-status/${orderId}`);
 
         if (res.data.paymentStatus === "approved") {
           clearInterval(interval);
@@ -54,7 +55,7 @@ const PaymentPending = () => {
     if (!orderId) return;
 
     try {
-      await axios.post(`http://localhost:5000/notify-admin/${orderId}`);
+      await axios.post(`${API_URL}/notify-admin/${orderId}`);
       setNotified(true);
       toast.success("Admin notified! Please wait for approval.");
     } catch (err) {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../config";
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -16,7 +17,7 @@ const MyOrders = () => {
   const fetchOrders = async (userId) => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/my-orders/${userId}`
+        `${API_URL}/my-orders/${userId}`
       );
 
       console.log("ORDERS DATA:", res.data);

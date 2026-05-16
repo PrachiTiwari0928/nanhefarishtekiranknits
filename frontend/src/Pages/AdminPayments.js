@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import API_URL from "../config";
 
 const AdminPayments = () => {
   const [orders, setOrders] = useState([]);
 
   const fetchPendingPayments = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/admin/pending-payments");
+      const res = await axios.get(`${API_URL}/admin/pending-payments`);
       setOrders(res.data);
     } catch (err) {
       alert("Error loading payments");
@@ -19,7 +20,7 @@ const AdminPayments = () => {
 
   const approvePayment = async (id) => {
     try {
-      await axios.get(`http://localhost:5000/admin/approve-payment/${id}`);
+      await axios.get(`${API_URL}/admin/approve-payment/${id}`);
       alert("Payment Approved ✅");
       fetchPendingPayments();
     } catch (err) {
@@ -29,7 +30,7 @@ const AdminPayments = () => {
 
   const rejectPayment = async (id) => {
     try {
-      await axios.get(`http://localhost:5000/admin/reject-payment/${id}`);
+      await axios.get(`${API_URL}/admin/reject-payment/${id}`);
       alert("Payment Rejected ❌");
       fetchPendingPayments();
     } catch (err) {
